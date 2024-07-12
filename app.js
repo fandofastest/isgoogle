@@ -6,7 +6,7 @@ var IPToASN = require('ip-to-asn');
 const app = express()
 const port = 3000
 
-app.get('/:ip?', async function(req, res)  {
+app.get('/ip/:ip?', async function(req, res)  {
     var client = new IPToASN();
 
     const cip = req.params.ip;
@@ -43,45 +43,36 @@ app.get('/:ip?', async function(req, res)  {
     
 app.get('/isgoogle', async function(req, res)  {
     var client = new IPToASN();
-    const getIP = require('external-ip')();
-    getIP((err, ip) => {
-        if (err) {
-            // every service in the list has failed
-            throw err;
-        }
-        console.log(ip);
-       
+    const ipAddress = req.ip;
+    console.log("test"+ipAddress);
     var addresses = [
-        ip,
-      ];
+      ipAddress,
+    ];
+
+    client.query(addresses, function (err, results) {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      
+      var ipsdesc=results[ipAddress]['description'].toLowerCase();
+     
+      if (ipsdesc.includes("google")) {
+          console.log('isgoogle');
+          res.send({            
+              isgoogle : true
+          });
+      }
+      else {
+          res.send({            
+              isgoogle : false
+          });
+      }
+
     
-      client.query(addresses, function (err, results) {
-        if (err) {
-          console.error(err);
-          return;
-        }
-        
-        var ipsdesc=results[ip]['description'].toLowerCase();
-       
-        if (ipsdesc.includes("google")) {
-            console.log('isgoogle');
-            res.send({            
-                isgoogle : true
-            });
-        }
-        else {
-            res.send({            
-                isgoogle : false
-            });
-        }
 
       
-
-        
-      });
-  
-   
-  });
+    });
     });
 
 
