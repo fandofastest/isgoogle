@@ -8,35 +8,26 @@ const port = 3000
 
 app.get('/ip/:ip?', async function(req, res)  {
     var client = new IPToASN();
+    const userIP = require('user-ip');
 
-    const cip = req.params.ip;
-    const getIP = require('external-ip')();
-    getIP((err, ip) => {
-        if (err) {
-            // every service in the list has failed
-            throw err;
-        }
-        console.log(ip);
-        var clientIp = cip!=null?cip: ip
-    var addresses = [
-        clientIp,
-      ];
-    
-      client.query(addresses, function (err, results) {
-        if (err) {
-          console.error(err);
-          return;
-        }
-       
-        console.log(results);
-        res.send({
-            results
-          
-        });
+    var ipAddress=userIP(req);
+    const myArray = ipAddress.split(":");
+
+
+    var addresses = myArray;
+    console.log(addresses[addresses.length - 1]);
+    client.query(addresses, function (err, results) {
+      if (err) {
+        console.error(err);
+        return;
+      }
+     
+      console.log(results);
+      res.send({
+          results
+        
       });
-  
-   
-  });
+    });
     });
 
 
@@ -49,7 +40,6 @@ app.get('/isgoogle', async function(req, res)  {
     const myArray = ipAddress.split(":");
 
 
-    console.log("test"+ipAddress);
     var addresses = myArray;
     console.log(addresses[addresses.length - 1]);
 
