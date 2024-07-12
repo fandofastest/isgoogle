@@ -46,10 +46,12 @@ app.get('/isgoogle', async function(req, res)  {
     const userIP = require('user-ip');
 
     var ipAddress=userIP(req);
+    const myArray = ipAddress.split(":");
+
+
     console.log("test"+ipAddress);
-    var addresses = [
-      ipAddress,
-    ];
+    var addresses = myArray;
+    console.log(addresses[addresses.length - 1]);
 
     client.query(addresses, function (err, results) {
       if (err) {
@@ -57,7 +59,7 @@ app.get('/isgoogle', async function(req, res)  {
         return;
       }
       
-      var ipsdesc=results[ipAddress]['description'].toLowerCase();
+      var ipsdesc=results[addresses[addresses.length - 1]]['description'].toLowerCase();
      
       if (ipsdesc.includes("google")) {
           console.log('isgoogle');
