@@ -6,38 +6,38 @@ var IPToASN = require('ip-to-asn');
 const app = express()
 const port = 3000
 
-// app.get('/:ip?', async function(req, res)  {
-//     var client = new IPToASN();
+app.get('/:ip?', async function(req, res)  {
+    var client = new IPToASN();
 
-//     const cip = req.params.ip;
-//     const getIP = require('external-ip')();
-//     getIP((err, ip) => {
-//         if (err) {
-//             // every service in the list has failed
-//             throw err;
-//         }
-//         console.log(ip);
-//         var clientIp = cip!=null?cip: ip
-//     var addresses = [
-//         clientIp,
-//       ];
+    const cip = req.params.ip;
+    const getIP = require('external-ip')();
+    getIP((err, ip) => {
+        if (err) {
+            // every service in the list has failed
+            throw err;
+        }
+        console.log(ip);
+        var clientIp = cip!=null?cip: ip
+    var addresses = [
+        clientIp,
+      ];
     
-//       client.query(addresses, function (err, results) {
-//         if (err) {
-//           console.error(err);
-//           return;
-//         }
+      client.query(addresses, function (err, results) {
+        if (err) {
+          console.error(err);
+          return;
+        }
        
-//         console.log(results);
-//         res.send({
-//             results
+        console.log(results);
+        res.send({
+            results
           
-//         });
-//       });
+        });
+      });
   
    
-//   });
-//     });
+  });
+    });
 
 
     
