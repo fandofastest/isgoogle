@@ -57,12 +57,14 @@ app.get('/isgoogle', async function(req, res)  {
       if (ipsdesc.includes("google")) {
           console.log('isgoogle');
           res.send({            
-              isgoogle : true
+              isgoogle : true,
+              ipAddress : addresses[addresses.length - 1]
           });
       }
       else {
           res.send({            
-              isgoogle : false
+              isgoogle : false,
+              ipAddress : addresses[addresses.length - 1]
           });
       }
 
