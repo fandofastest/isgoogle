@@ -5,6 +5,7 @@ var IPToASN = require('ip-to-asn');
 
 const app = express()
 const port = 3000
+app.set('trust proxy', true);
 
 app.get('/ip/:ip?', async function(req, res)  {
     var client = new IPToASN();
