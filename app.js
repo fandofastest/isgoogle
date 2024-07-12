@@ -58,13 +58,13 @@ app.get('/isgoogle', async function(req, res)  {
           console.log('isgoogle');
           res.send({            
               isgoogle : true,
-              ipAddress : addresses[addresses.length - 1]
+              ipAddress : results
           });
       }
       else {
           res.send({            
               isgoogle : false,
-              ipAddress : addresses[addresses.length - 1]
+              ipAddress : results
           });
       }
 
