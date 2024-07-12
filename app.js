@@ -15,6 +15,9 @@ app.get('/ip/:ip?', async function(req, res)  {
 
 
     var addresses = myArray;
+    if (req.params.ip!=null) {
+      addresses.push(req.params.ip);
+    }
     console.log(addresses[addresses.length - 1]);
     client.query(addresses, function (err, results) {
       if (err) {
