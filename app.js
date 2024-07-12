@@ -5,7 +5,6 @@ var IPToASN = require('ip-to-asn');
 
 const app = express()
 const port = 3000
-app.set('trust proxy', true);
 
 app.get('/ip/:ip?', async function(req, res)  {
     var client = new IPToASN();
@@ -44,7 +43,9 @@ app.get('/ip/:ip?', async function(req, res)  {
     
 app.get('/isgoogle', async function(req, res)  {
     var client = new IPToASN();
-    const ipAddress = req.ip;
+    const userIP = require('user-ip');
+
+    var ipAddress=userIP(req);
     console.log("test"+ipAddress);
     var addresses = [
       ipAddress,

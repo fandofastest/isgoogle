@@ -11,6 +11,8 @@
   "dependencies": {
     "express": "^4.18.2",
     "external-ip": "^2.3.1",
-    "ip-to-asn": "^1.0.0"
+    "ip-to-asn": "^1.0.0",
+    "request-ip": "^3.3.0",
+    "user-ip": "^1.1.0"
   }
 }
